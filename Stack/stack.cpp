@@ -18,12 +18,12 @@ public:
 		_container.push_back(value);
 	}
 
-	T& if_pop() // 복사와 제거를 한번에 하지 않은 이유 -> 성능
-	{
-		T ret = _data[_size - 1];  //주소값 전달 과정에서 복사해야하는데 T type이 무거울 가능성 / 복사하는 과정에서 예외처리 문제가 생길수도 있다.
-		_size--;
-		return ret;
-	}
+	//T& if_pop() // 복사와 제거를 한번에 하지 않은 이유 -> 성능
+	//{
+	//	T ret = _data[_size - 1];  //주소값 전달 과정에서 복사해야하는데 T type이 무거울 가능성 / 복사하는 과정에서 예외처리 문제가 생길수도 있다.
+	//	_size--;
+	//	return ret;
+	//}
 
 	void pop() //최상위 데이터 제거
 	{
