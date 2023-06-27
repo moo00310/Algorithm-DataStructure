@@ -11,7 +11,7 @@ vector <Vertex> vertices;
 vector <vector<int>> adjecent; //이차 벡터
 vector <bool> visited;
 
-void CeateGraph()
+void CreateGraph()
 {
     vertices.resize(6);
     adjecent = vector<vector<int>>(6);
@@ -84,7 +84,7 @@ void DfsAll() //끊어진 노드 까지 모두 검사
 
 int main()
 {
-    CeateGraph();
+    CreateGraph();
 
     DfsAll();
 }
