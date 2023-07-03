@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dijikstra", "Dijikstra\Diji
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tree", "Tree\Tree.vcxproj", "{EDBE37A9-3A63-4B30-B8EF-F509E1DBFAB6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Priority_Queue", "Priority_Queue\Priority_Queue.vcxproj", "{AA9DDB36-51C4-4296-AC19-4AD462C488D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{EDBE37A9-3A63-4B30-B8EF-F509E1DBFAB6}.Release|x64.Build.0 = Release|x64
 		{EDBE37A9-3A63-4B30-B8EF-F509E1DBFAB6}.Release|x86.ActiveCfg = Release|Win32
 		{EDBE37A9-3A63-4B30-B8EF-F509E1DBFAB6}.Release|x86.Build.0 = Release|Win32
+		{AA9DDB36-51C4-4296-AC19-4AD462C488D4}.Debug|x64.ActiveCfg = Debug|x64
+		{AA9DDB36-51C4-4296-AC19-4AD462C488D4}.Debug|x64.Build.0 = Debug|x64
+		{AA9DDB36-51C4-4296-AC19-4AD462C488D4}.Debug|x86.ActiveCfg = Debug|Win32
+		{AA9DDB36-51C4-4296-AC19-4AD462C488D4}.Debug|x86.Build.0 = Debug|Win32
+		{AA9DDB36-51C4-4296-AC19-4AD462C488D4}.Release|x64.ActiveCfg = Release|x64
+		{AA9DDB36-51C4-4296-AC19-4AD462C488D4}.Release|x64.Build.0 = Release|x64
+		{AA9DDB36-51C4-4296-AC19-4AD462C488D4}.Release|x86.ActiveCfg = Release|Win32
+		{AA9DDB36-51C4-4296-AC19-4AD462C488D4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
