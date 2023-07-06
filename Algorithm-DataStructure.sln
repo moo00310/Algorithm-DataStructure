@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinarySearch", "BinarySearc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinarySearch_Tree", "BinarySearch_Tree\BinarySearch_Tree.vcxproj", "{C8ED5162-EAE6-4852-B651-758934895BE4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RedBlack_Tree", "RedBlack_Tree\RedBlack_Tree.vcxproj", "{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{C8ED5162-EAE6-4852-B651-758934895BE4}.Release|x64.Build.0 = Release|x64
 		{C8ED5162-EAE6-4852-B651-758934895BE4}.Release|x86.ActiveCfg = Release|Win32
 		{C8ED5162-EAE6-4852-B651-758934895BE4}.Release|x86.Build.0 = Release|Win32
+		{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}.Debug|x64.ActiveCfg = Debug|x64
+		{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}.Debug|x64.Build.0 = Debug|x64
+		{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}.Debug|x86.ActiveCfg = Debug|Win32
+		{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}.Debug|x86.Build.0 = Debug|Win32
+		{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}.Release|x64.ActiveCfg = Release|x64
+		{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}.Release|x64.Build.0 = Release|x64
+		{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}.Release|x86.ActiveCfg = Release|Win32
+		{70FEECF0-EFB1-4A9D-9595-2250A2F0E318}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
