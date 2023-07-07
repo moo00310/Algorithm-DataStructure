@@ -27,6 +27,15 @@ void SetCursorPosition(int x, int y)
 	::SetConsoleCursorPosition(output, pos);
 }
 
+void ShowConsoleCursor(bool flag)
+{
+	HANDLE output = ::GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursorInfo;
+	::GetConsoleCursorInfo(output, &cursorInfo);
+	cursorInfo.bVisible = flag;
+	::SetConsoleCursorInfo(output, &cursorInfo);
+}
+
 RBTree::RBTree()
 { 
 	//널 포인터 역할
@@ -37,6 +46,13 @@ RBTree::RBTree()
 RBTree::~RBTree()
 {
 	delete _nil;
+}
+
+void RBTree::Print()
+{
+	::system("cls");
+	ShowConsoleCursor(false);
+	{ Print(_root, 10, 0); }
 }
 
 void RBTree::Print(Node* node, int x, int y)
@@ -243,14 +259,29 @@ void RBTree::Delete(int key)
 	Delete(deleteNode);
 }
 
+//먼저 BST 삭제 실행
 void RBTree::Delete(Node* node)
 {
-	if (node == nullptr)
+	if (node == _nil)
 		return;
-	if (node->left == nullptr)
+	if (node->left == _nil)
+	{
+		Color color = node->color;
+		Node* right = node->right;
 		Replace(node, node->right);
-	else if (node->right == nullptr)
+
+		if (color == Color::Black)
+			DeleteFixup(right);
+	}
+	else if (node->right == _nil)
+	{
+		Color color = node->color;
+		Node* left = node->left;
 		Replace(node, node->left);
+
+		if (color == Color::Black)
+			DeleteFixup(left);
+	}
 	else
 	{
 		Node* next = Next(node);
@@ -260,18 +291,139 @@ void RBTree::Delete(Node* node)
 
 }
 
+//먼저 BST삭제 실행..
+//- Case1) 삭제할 노드가 Red -> 그냥 삭제! 
+// 
+//- Case2) root가 DoubleBlack -> 그냥 Black 삭제!
+// 
+//- Case3) DoubleBlack의 sibling(형제)노드가 Red 이라면
+//-- s = black, p= red (s <-> p 색상교환)
+//-- DoubleBlack 방향으로 rotate(p)
+//-- goto other case
+//
+//- Case4) DoubleBlack의 sibling 노드가 Black 이고 sibling 양쪽 자식도 black 이라면
+//-- 추가 Black을 parent에게 이전
+//-- p가 Red라면 Black이 됨
+//-- p가 Black이면 DB가 됨
+//-- s = red
+//-- p를 대상으로 알고리즘 이어서 실행 (DB가 여전히 존재하면)
+//
+//- Case5) DB의 sibling 노드가 Black이고 sibling의 NearChild = red, ForChild = black 이면
+//-- s <-> near 색상교환
+//-- for 방향으로 rotate(s)
+//-- goto Case6
+//
+//- Case6) DB의 sibling 노드가 Black이고 sibling의 ForChild = red 라면
+//-- p <-> s 색상교환
+//-- for = black
+//-- rotate(p) (DB방향으로)
+//-- 추가 Black 제거
+
+void RBTree::DeleteFixup(Node* node)
+{
+	Node* x = node;
+	//[Case1 / Case2]
+	while (x != _root && x->color == Color::Black)
+	{
+		//     [p]
+		//[x(DB)] [s(?)]
+		if (x == x->parent ->left)
+		{
+			//[Case3]
+			Node* s = x->parent->right;
+			if (s->color == Color::Red)
+			{
+				s->color = Color::Black;
+				x->parent->color = Color::Red;
+
+				LeftRotate(x->parent);
+
+				s = x->parent->right;
+			}
+
+			//[Case4]
+			if (s->left->color == Color::Black && s->right->color == Color::Black)
+			{
+				s->color = Color::Red;
+				x = x->parent;
+			}
+			else
+			{
+
+				//[Case5]
+				if (s->right->color == Color::Black)
+				{
+					s->left->color = Color::Black;
+					s->color = Color::Red;
+					RightRotate(s);
+
+					s = x->parent->right;
+				}
+
+				//[Case6]
+				s->color = x->parent->color;
+				x->parent->color = Color::Black;
+				s->right->color = Color::Black;
+				LeftRotate(x->parent);
+				x = _root;
+			}
+		}
+		else
+		{
+			//[Case3]
+			Node* s = x->parent->left;
+			if (s->color == Color::Red)
+			{
+				s->color = Color::Black;
+				x->parent->color = Color::Red;
+
+				RightRotate(x->parent);
+
+				s = x->parent->left;
+			}
+
+			//[Case4]
+			if (s->right->color == Color::Black && s->left->color == Color::Black)
+			{
+				s->color = Color::Red;
+				x = x->parent;
+			}
+			else
+			{
+				//[Case5]
+				if (s->left->color == Color::Black)
+				{
+					s->right->color = Color::Black;
+					s->color = Color::Red;
+					LeftRotate(s);
+
+					s = x->parent->left;
+				}
+
+				//[Case6]
+				s->color = x->parent->color;
+				x->parent->color = Color::Black;
+				s->left->color = Color::Black;
+				RightRotate(x->parent);
+				x = _root;
+			}
+		}
+	}
+
+	x->color = Color::Black;
+}
+
 //u를 v 서브트리로 교체
 //그리고 delete u
 void RBTree::Replace(Node* u, Node* v)
 {
-	if (u->parent == nullptr)
+	if (u->parent == _nil)
 		_root = v;
 	else if (u == u->parent->left)
 		u->parent->left = v;
 	else
 		u->parent->right = v;
 
-	if (v)
 		v->parent = u->parent;
 
 	delete u;

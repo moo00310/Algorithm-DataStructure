@@ -24,7 +24,7 @@ struct Node
 //2) root는 Black
 //3) NIL(Leaf)는 Black
 //3) Red 노드의 자식은 Black(연속해서 Red- Red X)
-//4) 각 노드로부터 ~ 리프까지 가는 경로들은 모두 같은 수의 Black을 만난다.
+//4) 각 노드로부터 ~ 리프까지 가는 경로들은 모두 같은 수의 Black을 만난다. (Delete에서 상당히 중요)
 
 class RBTree
 {
@@ -32,7 +32,7 @@ public:
 	RBTree();
 	~RBTree();
 
-	void Print() { Print(_root, 10, 0); };
+	void Print();
 	void Print(Node* node, int x, int y);
 
 	Node* Search(Node* node, int key); // 재귀함수.ver
@@ -46,6 +46,7 @@ public:
 
 	void Delete(int key);
 	void Delete(Node* node);
+	void DeleteFixup(Node* node);
 
 	void Replace(Node* u, Node* v);
 
