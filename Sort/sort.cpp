@@ -85,13 +85,117 @@ void InsertionSort(vector<int>& v)
 	}
 }
 
+//4) 힙 정렬 (Heap Sort)
+void HeapSort(vector<int>& v)
+{
+	priority_queue<int, vector<int>, greater<int>> pq;
+
+	//O(N * logN)
+	for (int num : v)
+	{
+		pq.push(num);
+	}
+
+	v.clear();
+
+	//O(NlogN)
+	while (pq.empty() == false)
+	{
+		v.push_back(pq.top());
+		pq.pop();
+	}
+}
+
+//5) 병합 정렬 (MergeSort)
+// 분할 정복 (Divide and Conquer)
+// - 분할 (Divide)		 문제를 더 단순하게 분할
+// - 정복 (Conquer)		분할된 문제를 해결
+// - 결합 (Combine)		결과를 취합하여 마무리
+
+//[3][k][7][2][j][4][8][9]		8개*1 -> 4개*2 -> 2개*4 -> 1개*8 -> 2개*4 -> 4개*2 -> 8개*1
+//[3][k][7][2]  [j][4][8][9] 
+
+// 오른쪽/왼쪽 나누어 정렬
+//[2][3][7][k]  [4][8][9][j]
+
+//맨 앞에 온 숫자를 비교하여 삽입
+// [2][3][4][7][8][9][j][k]
+
+void MergeResult(vector<int>& v, int left, int mid, int right)
+{
+	//[2][3][7][K]  [4][8][9][J] 
+	//			[l]		        [r]
+	int leftIdx = left;
+	int rightIdx = mid + 1;
+
+	vector<int> temp;
+
+	while (leftIdx <= mid && rightIdx <= right)
+	{
+		if (v[leftIdx] <= v[rightIdx])
+		{
+			temp.push_back(v[leftIdx]);
+			leftIdx++;
+		}
+		else
+		{
+			temp.push_back(v[rightIdx]);
+			rightIdx++;
+		}
+	}
+	//왼쪽이 먼저 끝났으면, 오른쪽 나머지 데이터 복사
+	if (leftIdx >= mid)
+	{
+		while (rightIdx <= right)
+		{
+			temp.push_back(v[rightIdx]);
+			rightIdx++;
+		}
+	}
+	else //오른쪽이 먼저 끝났으면, 왼쪽 나머지 데이터 복사
+	{
+		while (leftIdx <= mid)
+		{
+			temp.push_back(v[leftIdx]);
+			leftIdx++;
+		}
+	}
+
+	for (int i = 0; i < (int)temp.size(); i++)
+	{
+		v[left + i] = temp[i];
+	}
+}
+
+void MergeSort(vector<int>& v, int left, int right)
+{
+	if (left >= right)
+		return;
+
+	int mid = (left + right) / 2;
+
+	MergeSort(v, left, mid); //4
+	MergeSort(v, mid +1, right); //4
+
+	MergeResult(v, left, mid, right);
+	//O(N logN)
+}
+
 int main()
 {
-	vector<int> v{1, 5, 3, 4, 2};
+	vector<int> v;
 
-	std::sort(v.begin(), v.end());
+	srand(time(0));
+
+	for (int i = 0; i < 50; i++)
+	{
+		int randValue = rand() % 100;
+		v.push_back(randValue);
+	}
 
 	//BubbleSort(v);
 	//SelectionSort(v);
-	InsertionSort(v);
-}
+	//InsertionSort(v);
+	//HeapSort(v);
+	MergeSort(v, 0, (int)v.size() - 1);
+} 
