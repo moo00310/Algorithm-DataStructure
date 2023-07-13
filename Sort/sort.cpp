@@ -181,6 +181,48 @@ void MergeSort(vector<int>& v, int left, int right)
 	//O(N logN)
 }
 
+
+//6) 퀵 정렬 (QuickSort)
+
+//[5][1][3][7][9][2][4][6][8]
+//p	 
+//   low                  hight
+
+int Partition(vector<int>& v, int left, int right)
+{
+	int pivot = v[left];
+	int low = left + 1;
+	int hight = right;
+
+	//파티션 부분은 O(N)
+	while (low <= hight)
+	{
+		while (low <= right && pivot >= v[low])
+			low++;
+
+		while (hight >= left + 1 && pivot <= v[hight])
+			hight--;
+
+		if (low < hight)
+			swap(v[low], v[hight]);
+	}
+
+	swap(v[left], v[hight]);
+	return hight;
+}
+
+//최악의 경우  O(N^2)
+//평균적으로는 O(NlogN)
+void QuickSort(vector<int>& v, int left, int right)
+{
+	if (left > right)
+		return;
+	int pivot = Partition(v, left, right);
+	QuickSort(v, left, pivot - 1);
+	QuickSort(v, pivot+1, right);
+
+}
+
 int main()
 {
 	vector<int> v;
@@ -197,5 +239,7 @@ int main()
 	//SelectionSort(v);
 	//InsertionSort(v);
 	//HeapSort(v);
-	MergeSort(v, 0, (int)v.size() - 1);
+	//MergeSort(v, 0, (int)v.size() - 1);
+	QuickSort(v, 0, (int)v.size() - 1);
+
 } 
