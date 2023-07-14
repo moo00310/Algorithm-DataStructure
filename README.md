@@ -16,4 +16,4 @@
 - InsertionSort 구현 / O(N^2)
 - HeapSort 구현 / O(NlogN)
 - MergeSort 구현 / O(NlogN)
-- -HeapSort 구현 / 평균 O(NlogN), 최악(N^2)
+- HeapSort 구현 / 평균 O(NlogN), 최악(N^2)
