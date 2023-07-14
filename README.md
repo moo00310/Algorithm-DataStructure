@@ -14,6 +14,7 @@
 - BubbleSort 구현 / O(N^2)
 - SelectSort 구현 / O(N^2)
 - InsertionSort 구현 / O(N^2)
-- HeapSort 구현 / O(NlogN), 최악(N^2)
+- HeapSort 구현 / O(NlogN)
 - MergeSort 구현 / O(NlogN)
+- QuickSort 구현 / O(NlogN), 최악(N^2)
 - HashTable 구현 /O(1) / map 과 hash_map(unordered_map)과 차이점, 개념 중요
