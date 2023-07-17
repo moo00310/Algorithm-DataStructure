@@ -5,7 +5,7 @@
 using namespace std;
 
 //그래프 / 트리 응용
-// 최소 스패닝 트리(Minimum Spanning Tree)
+// 최소 스패닝 트리(Minimum Spanning Tree)에 사용함
 
 //상호 배타적 집합(Disjoint Set)
 // -> 유니온 - 파인드 (Union-Find)
